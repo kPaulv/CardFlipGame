@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>CameraField</title>
+    <style>
+        .video-field {
+            display: block;
+            width: 500px;
+            height: 375px;
+            background: beige;
+        }
+
+        .play-button {
+            display: block;
+            margin-top: 10px;
+            width: 100px;
+            margin-left: 40%;
+        }
+
+        .snap-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        BODY {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+<div class="snap-panel">
+    <video class="video-field" id="videoField" autoplay></video>
+    <button class="play-button" id="playButton">Start video</button>
+</div>
+
+<script>
+    let button = document.getElementById("playButton");
+    let video = document.getElementById('videoField');
+    if (!(button == null || video == null)) {
+        button.onclick = function () {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+                    video.srcObject = stream;
+                })
+        }
+    }
+    else {
+        console.log("Video error.");
+    }
+</script>
+</body>
+</html>
